@@ -14,9 +14,6 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val dato = intent.extras?.getInt("dato")
-        Log.d("HomeActivity", "Dato recibido: $dato")
-
         binding.textViewTitle.setOnClickListener {
             finish()
         }

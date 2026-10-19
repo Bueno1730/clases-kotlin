@@ -1,53 +1,36 @@
 package com.example.claseskotlin
 
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.claseskotlin.databinding.ActivityMainBinding
+import com.example.claseskotlin.mvc_exam.Note
+import com.example.claseskotlin.mvc_exam.NotesDB
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+        setContentView(R.layout.activity_main)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        binding.button.setOnClickListener {
-            val email = binding.editUsername.text.toString()
-            val password = binding.edittextPassword.text.toString()
-            
-            var isValid = true
+        val edittextContent = findViewById<EditText>(R.id.edittextContent)
+        val btnSave = findViewById<Button>(R.id.btnSave)
 
-            if (!email.contains("@")) {
-                binding.textInputLayoutUsername.error = "Correo inválido"
-                isValid = false
-            } else {
-                binding.textInputLayoutUsername.error = null
-            }
-
-            if (password.length <= 3) {
-                binding.textInputLayoutPassword.error = "Password demasiado débil"
-                isValid = false
-            } else {
-                binding.textInputLayoutPassword.error = null
-            }
-            
-            if (isValid) {
-                val intent = android.content.Intent(this, HomeActivity::class.java)
-                intent.putExtra("dato", 2532)
-                startActivity(intent)
-            }
+        btnSave.setOnClickListener {
+            val content = edittextContent.text.toString()
+            val note = Note(NotesDB.notes.size + 1, content)
+            NotesDB.notes.add(note)
+            edittextContent.setText("")
+            Log.e("consola", NotesDB.notes.toString())
         }
     }
 }

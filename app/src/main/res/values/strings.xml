@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ClasesKotlin</string>
+    <string name="app_name">Simple Take Notes</string>
     <string name="curso_kotlin">Curso Kotlin</string>
     <string name="insert_user">Ingrese tu usuario</string>
     <string name="insert_password">Ingresa tu password</string>

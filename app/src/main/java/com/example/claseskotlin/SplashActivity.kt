@@ -13,6 +13,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("dato", 2532)
             startActivity(intent)
             finish()
         }, 3000)
